@@ -50,6 +50,7 @@ p {
   font-size: 20px;
   font-weight: 200;
   color: #00204a;
+  text-align: center;
 }
 
 form {
@@ -65,7 +66,6 @@ button {
   background-color: #425C5A;
   color: #fff;
   font-size: 30px;
-  padding-bottom: 6px;
   border-width: 0;
 }
 
@@ -77,6 +77,7 @@ input[type="text"] {
   background: transparent;
   font-size: 20px;
   font-weight: 200;
+  font-family: 'Montserrat', sans-serif;
   width: 313px;
 }
 
