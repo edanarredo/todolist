@@ -1,12 +1,12 @@
 // including modules
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");
 
 const app = express();
-let defaultItems = [];
-let workItems = [];
+const defaultItems = [];
+const workItems = [];
 
-// Configuration
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("../public"));
@@ -14,25 +14,16 @@ app.use(express.static("../public"));
 // Home page get-reqest
 app.get("/", (req, res) => {
 
-   const today = new Date();
-   fullDateConfig = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-   };
-
-   const date = today.toLocaleDateString("en-US", fullDateConfig);
-   res.render('list', { listTitle: date, newListItems: defaultItems });
+   const day = date.getDate();
+   res.render('list', { listTitle: day, newListItems: defaultItems });
 
 });
 
 // Home page post-request
 app.post("/", (req, res) => {
 
-   let newItem = req.body.newItem;
-   console.log(req.body.list);
-   // check if newItem was submitted into home or work list
+   const newItem = req.body.newItem;
+
    if (req.body.list === "Work") {
       workItems.push(newItem);
       res.redirect("/work");
@@ -53,6 +44,7 @@ app.get("/work", (req, res) => {
 app.get("/about", (req, res) => {
 
    res.render("about");
+
 });
 
 app.listen(3000, () => console.log('Website running on port 3000.'));
